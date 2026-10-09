@@ -37,24 +37,54 @@ public class ProjectController : Controller
     
     // POST: Project/Create - Processes new project submission and saves it to the database.
     [HttpPost]
-    [ValidateAntiForgeryToken]
-    public IActionResult Create(Project project) 
-    {
-        // Check if the submitted form data passes model validation rules
-        if (ModelState.IsValid)
-        {
-            // Add the new project entity to the database context
-            _context.Add(project);
+    [ValidateAntiForgeryToken] 
 
-            // Persist changes to the underlying database
-            _context.SaveChanges();
-            
-            // Redirect the user back to the Index action to view the project list
-            return RedirectToAction("Index");
-        }
-        
-        // If validation fails, re-render the create form with validation errors
-        return View(project);
+    public IActionResult Create(Project project) 
+
+    { 
+
+        if (ModelState.IsValid) 
+
+        { 
+
+            // Convert to UTC before saving 
+
+            project.StartDate = ToUtc(project.StartDate); 
+
+            project.EndDate = ToUtc(project.EndDate); 
+
+ 
+
+            _context.Projects.Add(project); 
+
+            _context.SaveChanges(); 
+
+            return RedirectToAction("Index"); 
+
+        } 
+
+ 
+
+        return View(project); 
+
+    } 
+
+ 
+
+    private DateTime ToUtc(DateTime input) 
+
+    { 
+
+        if (input.Kind == DateTimeKind.Utc) 
+
+            return input; 
+
+        if (input.Kind == DateTimeKind.Unspecified) 
+
+            return DateTime.SpecifyKind(input, DateTimeKind.Utc); // assume local is already UTC 
+
+        return input.ToUniversalTime(); 
+
     } 
     
     // GET: Project/Details/{id} - Displays details for a specific project.
