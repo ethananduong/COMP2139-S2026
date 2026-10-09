@@ -1,45 +1,24 @@
-﻿namespace COMP2139_ICE2.Models;
+﻿
+namespace COMP2139_ICE2.Models;
+
 using System.ComponentModel.DataAnnotations;
 
 public class Project
 {
+    public int ProjectId { get; set; }
 
-        /// <summary>
-        /// The unique identifier for the project.
-        /// </summary>
-        public int ProjectId { get; set; }
+    [Required]
+    public required string Name { get; set; }
 
-        /// <summary>
-        /// The name of the project.
-        /// - [Required]: Ensures this property must have a value when the object is validated.
-        /// - required: A C# 11 feature that enforces initialization during object creation.
-        /// </summary>
-        [Required]
-        public required string Name { get; set; }
+    public string? Description { get; set; }
 
-        /// <summary>
-        /// An optional description of the project.
-        /// - Nullable: Allows this property to have a null value.
-        /// </summary>
-        public string? Description { get; set; }
+    [DataType(DataType.Date)]
+    public DateTime StartDate { get; set; }
 
-        /// <summary>
-        /// The start date of the project.
-        /// - [DataType(DataType.Date)]: Specifies that this property represents a date (not a time).
-        /// </summary>
-        [DataType(DataType.Date)]
-        public DateTime StartDate { get; set; }
+    [DataType(DataType.Date)]
+    public DateTime EndDate { get; set; }
 
-        /// <summary>
-        /// The end date of the project.
-        /// - [DataType(DataType.Date)]: Specifies that this property represents a date (not a time).
-        /// </summary>
-        [DataType(DataType.Date)]
-        public DateTime EndDate { get; set; }
+    public string? Status { get; set; }
 
-        /// <summary>
-        /// The current status of the project (e.g., "In Progress", "Completed").
-        /// </summary>
-        public string? Status { get; set; }
-
+    public ICollection<ProjectTask> ProjectTasks { get; set; } = new List<ProjectTask>();
 }
