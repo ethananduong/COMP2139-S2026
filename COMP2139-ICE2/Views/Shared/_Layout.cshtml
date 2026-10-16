@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-
 QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==
 " crossorigin="anonymous" referrerpolicy="no-referrer">
-
 </head>
 <body>
 <header>
@@ -31,14 +30,37 @@ QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About"><i class="fa-solid fa-id-card"></i>About</a>
                     </li>
-		    <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Project" asp-action="Index">
-            	      <i class="fa-solid fa-folder"></i> Projects
-        </a>
-    </li>
+                            <i class="fa-solid fa-folder"></i> Projects
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
+        
+        
+        <!-- Lab 6 -->
+        <!-- Search Form -->
+        <!-- Lab 6 - Search Form in Navbar -->
+        <form class="d-flex align-items-center" asp-controller="Home" asp-action="GeneralSearch" method="get">
+            <div class="input-group">
+                <!-- Search Input -->
+                <input class="form-control me-2" type="text" placeholder="Search..." name="searchString" required>
+
+                <!-- Dropdown for Search Type -->
+                <select class="form-select me-2" name="searchType" required>
+                    <option value="" disabled selected>Select Search Type</option>
+                    <option value="Projects">Projects</option>
+                    <option value="Tasks">Tasks</option>
+                </select>
+
+                <!-- Search Button -->
+                <button class="btn btn-outline-success" type="submit">
+                    <i class="fa fa-search"></i> Search
+                </button>
+            </div>
+        </form>
     </nav>
 </header>
 <div class="container">
